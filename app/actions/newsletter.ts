@@ -79,7 +79,7 @@ export async function subscribeToNewsletter(
     console.error('Buttondown API error:', error);
     return {
       success: false,
-      message: 'An error occurred. Please try again later.',
+      message: 'Failed to subscribe. Please try again later.',
       status: 'error',
     };
   }
