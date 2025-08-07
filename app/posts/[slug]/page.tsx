@@ -10,7 +10,7 @@ import { getAllPosts, getPostAndMorePosts } from "@/lib/api";
 // Define the correct PageProps type
 type PageProps = {
   params: Promise<{ slug: string }>; // params is a Promise
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>; // searchParams is a Promise
 };
 
 export async function generateStaticParams() {
