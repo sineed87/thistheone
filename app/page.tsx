@@ -5,6 +5,8 @@ import Date from "./date";
 import CoverImage from "./cover-image";
 import Avatar from "./avatar";
 import MoreStories from "./more-stories";
+import Latest from "./latest";
+import AllPost from "./allposts";
 
 import { getAllPosts } from "@/lib/api";
 import { CMS_NAME, CMS_URL } from "@/lib/constants";
@@ -77,7 +79,9 @@ function HeroPost({
 }
 
 export default async function Page() {
-  const { isEnabled } = draftMode();
+  // ✅ Await draftMode() before accessing isEnabled
+  const { isEnabled } = await draftMode();
+
   const allPosts = await getAllPosts(isEnabled);
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
@@ -85,16 +89,13 @@ export default async function Page() {
   return (
     <div className="container mx-auto px-5">
       <Intro />
-      {heroPost && (
-        <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-        />
-      )}
+      <div>
+        <Latest/>
+      </div>
+      <div>
+        <AllPost/>
+      </div>
+      
       <MoreStories morePosts={morePosts} />
     </div>
   );

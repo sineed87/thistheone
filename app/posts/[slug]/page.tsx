@@ -22,14 +22,15 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
-  const { isEnabled } = draftMode();
+  const { isEnabled } = await draftMode();
+
   const { post, morePosts } = await getPostAndMorePosts(params.slug, isEnabled);
 
   return (
     <div className="container mx-auto px-5">
       <h2 className="mb-20 mt-8 text-2xl font-bold leading-tight tracking-tight md:text-4xl md:tracking-tighter">
         <Link href="/" className="hover:underline">
-          Blog
+          Blog1
         </Link>
         .
       </h2>
