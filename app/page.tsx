@@ -10,6 +10,8 @@ import AllPost from "./allposts";
 
 import { getAllPosts } from "@/lib/api";
 import { CMS_NAME, CMS_URL } from "@/lib/constants";
+import SubscribeForm from "./SubscribeForm";
+
 
 function Intro() {
   return (
@@ -89,6 +91,7 @@ export default async function Page() {
   return (
     <div className="container mx-auto px-5">
       <Intro />
+      <SubscribeForm />
       <div>
         <Latest/>
       </div>
