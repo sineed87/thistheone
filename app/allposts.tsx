@@ -21,11 +21,15 @@ export default async function AllPostsPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {allPosts.map((post) => (
           <article key={post.slug} className="w-full">
-            <CoverImage
+            <div className="">
+              <CoverImage 
+
               title={post.title}
               slug={post.slug}
               url={post.coverImage.url}
             />
+            </div>
+            
             <h2 className="mt-8 text-3xl font-semibold leading-tight">
               <Link href={`/posts/${post.slug}`} className="hover:underline">
                 {post.title}
