@@ -1,34 +1,29 @@
-import Link from "next/link";
 import { draftMode } from "next/headers";
-
+import Link from "next/link";
 import MoreStories from "../../more-stories";
 import Avatar from "../../avatar";
 import Date from "../../date";
 import CoverImage from "../../cover-image";
-
 import { Markdown } from "@/lib/markdown";
 import { getAllPosts, getPostAndMorePosts } from "@/lib/api";
 
+// Define the correct PageProps type
+type PageProps = {
+  params: Promise<{ slug: string }>; // params is a Promise
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
 export async function generateStaticParams() {
   const allPosts = await getAllPosts(false);
-
   return allPosts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
-
-export default async function PostPage(props: PageProps) {
-  const { params } = props;
-
+export default async function PostPage({ params }: PageProps) {
   const { isEnabled } = await draftMode();
-
-  const { post, morePosts } = await getPostAndMorePosts(params.slug, isEnabled);
+  const { slug } = await params; // Await params to get the slug
+  const { post, morePosts } = await getPostAndMorePosts(slug, isEnabled);
 
   return (
     <div className="container mx-auto px-5">
@@ -60,7 +55,6 @@ export default async function PostPage(props: PageProps) {
             <Date dateString={post.date} />
           </div>
         </div>
-
         <div className="mx-auto max-w-2xl">
           <div className="prose">
             <Markdown content={post.content} />
