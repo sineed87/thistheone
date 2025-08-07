@@ -39,7 +39,7 @@ function PostPreview({
 
 export default function MoreStories({ morePosts }: { morePosts: any[] }) {
   // Assuming morePosts is already sorted by date (latest first)
-  const latestPosts = morePosts.slice(0, 2);
+  const latestPosts = morePosts.slice(0, 3);
 
   return (
     <section>
